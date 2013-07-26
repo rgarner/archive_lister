@@ -7,10 +7,30 @@ require 'archive_lister'
 
 @options = Trollop::options do
   version "arcl version #{ArchiveLister::VERSION}"
+
+  opt :input_file, 'File from which to draw the urls', type: String
+  opt :output_dir, 'Dir to output files (requires --input-file)', type: String
+  opt :skip_existing, 'Skip existing files when in batch', type: TrueClass
+  opt :verbose, 'Print failures at finish', type: TrueClass
 end
 
-ArchiveLister.list(ARGV[0]).each do |url|
-  puts url
+mode = (@options[:input_file] && @options[:output_dir]) ? :batch : :single
+
+case mode
+  when :single
+    begin
+      ArchiveLister.list(ARGV[0]).each do |url|
+        puts url
+      end
+    rescue ArchiveLister::HttpError => e
+      puts e
+    end
+  when :batch
+    ArchiveLister.batch(
+        @options[:input_file],
+        @options[:output_dir],
+        @options.select { |k, _| [:skip_existing, :verbose].include?(k) }
+    )
 end
 
 
