@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
+
+require 'trollop'
+require 'archive_lister'
+
+@options = Trollop::options do
+  version "arcl version #{ArchiveLister::VERSION}"
+end
+
+ArchiveLister.list(ARGV[0]).each do |url|
+  puts url
+end
+
+
