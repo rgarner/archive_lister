@@ -15,7 +15,7 @@ module ArchiveLister
           subject(:url) { urls.first }
 
           it         { should be_an(Addressable::URI) }
-          its(:to_s) { should eql('http://www.voa.gov.uk:80/corporate') }
+          its(:to_s) { should eql('http://www.voa.gov.uk/corporate') }
         end
       end
     end

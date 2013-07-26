@@ -10,7 +10,10 @@ module ArchiveLister
       doc = Nokogiri::HTML(content)
       WaybackFile.new(
         doc.css('td.url a').map do |url_node|
-          Addressable::URI.parse(url_node.text)
+          Addressable::URI.parse(url_node.text).tap do |url|
+            url.port = nil if (url.port == 80 && url.scheme == 'http')
+            url.port = nil if (url.port == 443 && url.scheme == 'https')
+          end
         end
       )
     end
