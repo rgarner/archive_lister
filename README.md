@@ -20,9 +20,29 @@ Or install it yourself as:
 
 Has a bin 'arcl', usage:
 
+```
+arcl version 0.0.1
+Options:
+  --input-file, -i <s>:   File from which to draw the urls
+  --output-dir, -o <s>:   Dir to output files (requires --input-file)
+   --skip-existing, -s:   Skip existing files when in batch
+         --verbose, -v:   Print failures at finish
+         --version, -e:   Print version and exit
+            --help, -h:   Show this message
+```
+
+### Examples
+
 ```shell
   arcl http://somewhere.com
 ```
+
+### Batch
+
+```shell
+  arcl -i urls.txt -o data/wayback -v -s
+```
+
 
 ## Contributing
 
