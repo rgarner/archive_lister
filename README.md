@@ -1,6 +1,6 @@
 # ArchiveLister
 
-TODO: Write a gem description
+Queries the Wayback Machine for URLs associated with a given root
 
 ## Installation
 
@@ -18,7 +18,11 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Has a bin 'arcl', usage:
+
+```shell
+  arcl http://somewhere.com
+```
 
 ## Contributing
 
